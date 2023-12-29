@@ -108,20 +108,19 @@
 
     .multipleTransform {
       background-image: url(./img/2.png);
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: right;
     }
 
     .inputArea {
       background-image: url(./img/1.png);
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: right;
     }
 
     .winnerForm {
       background-image: url(./img/3.png);
+    }
+
+    .winnerForm,
+    .inputArea,
+    .multipleTransform {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: right;
@@ -591,7 +590,7 @@
   })
 
   // 初始抽獎動畫
-  let text = '卯咪生日大快樂!!!';  // The message displayed
+  let text = 'ㄅㄆㄇ二周年啦!';  // The message displayed
   let chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890() ';  // All possible Charactrers
   let scale = 40;  // Font size and overall scale
   let breaks = 0.003;  // Speed loss per frame
@@ -626,7 +625,7 @@
             console.log(data);
             if (!data) {
               toastr.error('請先輸入抽獎者名單')
-              text = '卯咪生日大快樂!!!'
+              text = '卯咪二周年快樂!!!'
             }
             else {
               if (totalPickNumber === 1) {
@@ -640,10 +639,12 @@
             drawAnimationDetail(text)
           }
           ).catch(e => {
+            console.log(e);
             nowPlaying = false
             if (drawList.length === 1 && !!drawList[0]) {
+              console.log("123");
               text = drawList[0]
-              setWinnerList(drawList[0])
+              setWinnerList([0], drawList)
             } else {
               toastr.error('請輸入抽獎名單或所有參與者皆已中獎')
               text = '才沒有斷片!!!'
