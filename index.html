@@ -611,7 +611,11 @@
       nowPlaying = true
       playAnimation()
       let drawList = getDrawList()
-      let http = `https://www.random.org/integers/?num=${totalPickNumber * 10}&min=0&max=${drawList.length - 1}&col=1&base=10&format=plain&rnd=new`
+      let pick = totalPickNumber
+      if(totalPickNumber > drawList.length){
+        pick = drawList.length
+      }
+      let http = `https://www.random.org/integers/?num=${pick * 10}&min=0&max=${drawList.length - 1}&col=1&base=10&format=plain&rnd=new`
       if (winnerMode === 'edit') {
         toastr.error('請先儲存中獎者名單')
         return
@@ -642,7 +646,6 @@
             console.log(e);
             nowPlaying = false
             if (drawList.length === 1 && !!drawList[0]) {
-              console.log("123");
               text = drawList[0]
               setWinnerList([0], drawList)
             } else {
